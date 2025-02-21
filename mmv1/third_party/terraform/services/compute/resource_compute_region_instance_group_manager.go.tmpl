@@ -269,6 +269,13 @@ func ResourceComputeRegionInstanceGroupManager() *schema.Resource {
 							ValidateFunc: validation.StringInSlice([]string{"REPAIR", "DO_NOTHING"}, true),
 							Description:  `Default behavior for all instance or health check failures.`,
 						},
+						"on_failed_healthcheck": {
+							Type:		   schema.TypeString,
+							Default:       "DEFAULT_ACTION",
+							Optional:      true,
+							ValidateFunc:  validation.StringInSlice([]string{"DEFAULT_ACTION", "REPAIR", "DO_NOTHING"}, true),
+							Description:   `Specifies the action that a MIG performs on an unhealthy VM. A VM is marked as unhealthy when the application running on that VM fails a health check.`,
+						},
 						"force_update_on_repair": {
 							Type:         schema.TypeString,
 							Default:      "NO",

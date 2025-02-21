@@ -50,6 +50,7 @@ resource "google_compute_instance_group_manager" "a3_dws" {
 
   instance_lifecycle_policy {
     default_action_on_failure = "DO_NOTHING"
+    on_failed_healthcheck = "DEFAULT_ACTION"
   }
 
   wait_for_instances = false

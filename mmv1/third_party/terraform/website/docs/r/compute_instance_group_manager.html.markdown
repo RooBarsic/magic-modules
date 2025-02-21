@@ -246,11 +246,13 @@ update_policy {
 instance_lifecycle_policy {
   force_update_on_repair    = "YES"
   default_action_on_failure = "DO_NOTHING"
+  on_failed_healthcheck     = "DO_NOTHING"
 }
 ```
 
 * `force_update_on_repair` - (Optional), Specifies whether to apply the group's latest configuration when repairing a VM. Valid options are: `YES`, `NO`. If `YES` and you updated the group's instance template or per-instance configurations after the VM was created, then these changes are applied when VM is repaired. If `NO` (default), then updates are applied in accordance with the group's update policy type.
 * `default_action_on_failure` - (Optional), Default behavior for all instance or health check failures. Valid options are: `REPAIR`, `DO_NOTHING`. If `DO_NOTHING` then instances will not be repaired. If `REPAIR` (default), then failed instances will be repaired.
+* `on_failed_healthcheck` - (Optional), Default behavior for all instance in case of health check failures. Valid options are: `DEFAULT_ACTION`, `REPAIR`, `DO_NOTHING`. If `DO_NOTHING` then instances will not be repaired. If `REPAIR` then unhealthy instances will be repaired. If `DEFAULT_ACTION` (default), then action from `default_action_on_failure` will be applied.
 - - -
 
 <a name="nested_all_instances_config"></a>The `all_instances_config` block supports:
