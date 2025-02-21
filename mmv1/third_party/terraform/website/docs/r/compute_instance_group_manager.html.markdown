@@ -89,9 +89,10 @@ resource "google_compute_instance_group_manager" "appserver" {
 }
 ```
 
-## Example Usage with standby policy (`google` provider)
+## Example Usage with standby policy (`google-beta` provider)
 ```hcl
 resource "google_compute_instance_group_manager" "igm-sr" {
+  provider = google-beta
   name = "tf-sr-igm"
 
   base_instance_name        = "tf-sr-igm-instance"
@@ -182,11 +183,11 @@ group. You can specify only one value. Structure is [documented below](#nested_a
   allInstancesConfig on the group, you must update the group's instances to
   apply the configuration.
 
-* `standby_policy` - (Optional) The standby policy for stopped and suspended instances. Structure is documented below. For more information, see the [official documentation](https://cloud.google.com/compute/docs/instance-groups/suspended-and-stopped-vms-in-mig).
+* `standby_policy` - (Optional [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html)) The standby policy for stopped and suspended instances. Structure is documented below. For more information, see the [official documentation](https://cloud.google.com/compute/docs/instance-groups/suspended-and-stopped-vms-in-mig) and [API](https://cloud.google.com/compute/docs/reference/rest/beta/regionInstanceGroupManagers/patch)
 
-* `target_suspended_size` - (Optional) The target number of suspended instances for this managed instance group.
+* `target_suspended_size` - (Optional [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html)) The target number of suspended instances for this managed instance group.
 
-* `target_stopped_size` - (Optional) The target number of stopped instances for this managed instance group.
+* `target_stopped_size` - (Optional [Beta](https://terraform.io/docs/providers/google/guides/provider_versions.html)) The target number of stopped instances for this managed instance group.
 
 * `stateful_disk` - (Optional) Disks created on the instances that will be preserved on instance delete, update, etc. Structure is [documented below](#nested_stateful_disk). For more information see the [official documentation](https://cloud.google.com/compute/docs/instance-groups/configuring-stateful-disks-in-migs).
 
@@ -245,13 +246,13 @@ update_policy {
 instance_lifecycle_policy {
   force_update_on_repair    = "YES"
   default_action_on_failure = "DO_NOTHING"
-  on_failed_healthcheck     = "DO_NOTHING"
+  on_failed_health_check     = "DO_NOTHING"
 }
 ```
 
 * `force_update_on_repair` - (Optional), Specifies whether to apply the group's latest configuration when repairing a VM. Valid options are: `YES`, `NO`. If `YES` and you updated the group's instance template or per-instance configurations after the VM was created, then these changes are applied when VM is repaired. If `NO` (default), then updates are applied in accordance with the group's update policy type.
 * `default_action_on_failure` - (Optional), Default behavior for all instance or health check failures. Valid options are: `REPAIR`, `DO_NOTHING`. If `DO_NOTHING` then instances will not be repaired. If `REPAIR` (default), then failed instances will be repaired.
-* `on_failed_healthcheck` - (Optional), Default behavior for all instance in case of health check failures. Valid options are: `DEFAULT_ACTION`, `REPAIR`, `DO_NOTHING`. If `DO_NOTHING` then instances will not be repaired. If `REPAIR` then unhealthy instances will be repaired. If `DEFAULT_ACTION` (default), then action from `default_action_on_failure` will be applied.
+* `on_failed_health_check` - (Optional), Default behavior for all instance in case of health check failures. Valid options are: `DEFAULT_ACTION`, `REPAIR`, `DO_NOTHING`. If `DO_NOTHING` then instances will not be repaired. If `REPAIR` then unhealthy instances will be repaired. If `DEFAULT_ACTION` (default), then action from `default_action_on_failure` will be applied.
 - - -
 
 <a name="nested_all_instances_config"></a>The `all_instances_config` block supports:
