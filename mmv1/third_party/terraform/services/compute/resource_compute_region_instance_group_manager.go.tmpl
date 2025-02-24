@@ -1217,9 +1217,6 @@ func flattenRegionUpdatePolicy(updatePolicy *compute.InstanceGroupManagerUpdateP
 	return results
 }
 
-<<<<<<< HEAD
-func expandDistributionPolicy(d *schema.ResourceData) *compute.DistributionPolicy {
-=======
 {{- if ne $.TargetVersionName "ga" }}
 func expandInstanceFlexibilityPolicy(d *schema.ResourceData) *compute.InstanceGroupManagerInstanceFlexibilityPolicy {
 	instanceFlexibilityPolicy := &compute.InstanceGroupManagerInstanceFlexibilityPolicy{}
@@ -1266,7 +1263,6 @@ func expandDistributionPolicyForUpdate(d *schema.ResourceData) *compute.Distribu
 }
 
 func expandDistributionPolicyForCreate(d *schema.ResourceData) *compute.DistributionPolicy {
->>>>>>> f96449746 (Add instanceFlexibilityPolicy to google_compute_region_instance_group_manager (#12163))
 	dpz := d.Get("distribution_policy_zones").(*schema.Set)
 	dpts := d.Get("distribution_policy_target_shape").(string)
 	if dpz.Len() == 0 && dpts == "" {
