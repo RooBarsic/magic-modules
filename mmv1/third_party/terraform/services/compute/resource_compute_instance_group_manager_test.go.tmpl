@@ -1973,7 +1973,7 @@ resource "google_compute_instance_group_manager" "igm-basic" {
     force_update_on_repair = "YES"
     default_action_on_failure = "REPAIR"
 {{- if ne $.TargetVersionName "ga" }}
-    on_failed_health_check = DEFAULT_ACTION
+    on_failed_health_check = "DEFAULT_ACTION"
 {{- end }}
   }
   wait_for_instances = true
