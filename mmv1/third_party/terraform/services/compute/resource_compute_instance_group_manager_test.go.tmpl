@@ -154,7 +154,7 @@ func TestAccInstanceGroupManager_update(t *testing.T) {
 				Check: resource.ComposeTestCheckFunc(
 					resource.TestCheckResourceAttr("google_compute_instance_group_manager.igm-update", "instance_lifecycle_policy.0.default_action_on_failure", "REPAIR"),
 {{- if ne $.TargetVersionName "ga" }}
-					resource.TestCheckResourceAttr("google_compute_instance_group_manager.igm-update", "instance_lifecycle_policy.0.on_failed_health_check", "DEFAULT_ACTION"),
+					resource.TestCheckResourceAttr("google_compute_instance_group_manager.igm-update", "instance_lifecycle_policy.0.on_failed_health_check", "REPAIR"),
 {{- end }}
 				),
 			},
@@ -1973,7 +1973,7 @@ resource "google_compute_instance_group_manager" "igm-basic" {
     force_update_on_repair = "YES"
     default_action_on_failure = "REPAIR"
 {{- if ne $.TargetVersionName "ga" }}
-    on_failed_health_check = "DEFAULT_ACTION"
+    on_failed_health_check = "REPAIR"
 {{- end }}
   }
   wait_for_instances = true
